@@ -1,0 +1,47 @@
+.slide-b{
+    overflow: hidden;
+}
+.slide-b > div{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.slide-b img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.slide-b .caption{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: white;
+    border-top-right-radius: 5px;
+    padding: 5px 10px;
+}
+
+.slide-b .slide-in{
+    transform: translateX(-100%);
+    animation: slideInB .5s ease-in-out forwards;
+}
+.slide-b .slide-out{
+    transform: translateX(0);
+    animation: slideOutB .5s ease-in-out forwards;
+
+}
+
+.slide-b .slide-in .caption{
+    transform:translateX(-100%);
+    animation: slideInB .5s ease-in-out forwards;
+    animation-delay: .3s;
+}
+
+
+@keyframes slideInB {
+    to{transform: translateX(0)}
+}
+@keyframes slideOutB {
+    to{transform: translateX(100%)}
+}

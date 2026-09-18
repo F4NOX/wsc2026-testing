@@ -1,0 +1,46 @@
+.slide-c{
+    overflow: hidden;
+}
+.slide-c > div{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.slide-c img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.slide-c .caption{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: white;
+    border-top-right-radius: 5px;
+    padding: 5px 10px;
+}
+
+.slide-c .slide-in{
+    transform: translateY(100%);
+    animation: slideInC .5s ease-in-out forwards;
+}
+.slide-c .slide-out{
+    transform: translateY(0);
+    animation: slideOutC .5s ease-in-out forwards;
+}
+
+.slide-c .slide-in .caption span{
+    display: inline-block;
+    transform:translateY(100%);
+    animation: slideInC .5s ease-in-out forwards;
+}
+
+
+@keyframes slideInC {
+    to{transform: translateY(0)}
+}
+@keyframes slideOutC {
+    to{transform: translateY(-100%)}
+}

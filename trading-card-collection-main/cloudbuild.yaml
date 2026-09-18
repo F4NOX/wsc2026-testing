@@ -1,0 +1,21 @@
+# =====================================================================
+# Cloud Build — non-Node app (PHP / nginx / test tool)
+# No npm step (no package.json); the Dockerfile handles its own deps
+# (composer, etc). Kaniko builds & caches image layers per repo.
+# =====================================================================
+
+options:
+  # 8 vCPU / 8GB build VM (default is 2 vCPU)
+  machineType: 'E2_HIGHCPU_8'
+
+steps:
+  # Build & push this repo's image with Kaniko (per-repo destination + layer cache)
+  - name: 'gcr.io/kaniko-project/executor:latest'
+    args:
+    - --destination=europe-west1-docker.pkg.dev/nstrimio/cloud-run-source-deploy/ws26-yii:latest
+    - --cache=true
+    - --cache-ttl=24h
+    - --cache-dir=gs://nstrimio-build-cache/ws26-yii/kaniko-cache
+
+# Prevent hung tasks from consuming build quotas
+timeout: '1200s'

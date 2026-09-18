@@ -1,0 +1,118 @@
+.slide-f {
+    overflow: hidden;
+    /* This creates a CRT TV scanline effect over everything */
+    position: relative;
+}
+.slide-f::after{
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 2px,
+        rgba(0,0,0,.3) 2px,
+        rgba(0,0,0,.3) 4px
+    );
+    pointer-events: none;
+    z-index: 100;
+}
+.slide-f > div{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.slide-f img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    filter: contrast(1.1);
+}
+
+.slide-f .caption{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: white;
+    border-top-right-radius: 5px;
+    padding: 5px 10px;
+}
+
+.slide-f .slide-in{
+    z-index: 2;
+    opacity: 1;
+    animation: slideInF .5s steps(5) forwards;
+}
+.slide-f .slide-out{
+    z-index: 1;
+    opacity: 1;
+    animation: slideOutF .5s linear forwards;
+
+}
+
+.slide-f .slide-in .caption{
+    animation: slideCaptionF .4s steps(3) forwards;
+    animation-delay: .3s;
+}
+
+
+@keyframes slideInF {
+    0% {
+        transform: translateX(-100%) skewX(20deg);
+        filter: grayscale(1) brightness(2); /* Flash white/grey */
+    }
+    20% {
+        transform: translateX(-60%) skewX(-10deg);
+        filter: none;
+    }
+    40% {
+        transform: translateX(-20%) skewX(5deg);
+        filter: hue-rotate(90deg); /* Wrong color briefly */
+    }
+    60% {
+        transform: translateX(5%) skewX(0deg);
+        filter: none;
+    }
+    80% {
+        transform: translateX(-2%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes slideOutF {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0.5;
+        /* Squashes the image as it leaves */
+        transform: scale(1.1, 0.01); 
+        filter: grayscale(1);
+    }
+}
+@keyframes slideCaptionF {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    60% {
+        opacity: 1;
+        transform: translateX(0px);
+        background-color: black;
+        color: white;
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0px);
+        background-color: white;
+        color: black;
+    }
+}
